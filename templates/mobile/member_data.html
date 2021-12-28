@@ -1,0 +1,41 @@
+{% extends 'mobile/base.html' %}
+
+{% load static from staticfiles %}
+
+{% block mainbody %}
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>我的资料</h1>
+			<a href="{% url 'mobile_member_index' %}" class="return"><i></i></a>
+            <!--a href="#" class="head-r" type="submit">保存</a-->
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+        <form action="{% url 'mobile_member_data_update' %}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="oldavatar" value="{{ request.session.mobileuser.avatar }}" />
+            {% csrf_token %}
+            <div class="list list-title">
+                <ul class="line">
+                    <li><i>帐　　号：</i>{{ request.session.mobileuser.id }}</li>
+                    <li><i>昵　　称：</i><input type="text" name="nickname" placeholder="填写您的昵称" value="{{ request.session.mobileuser.nickname }}"></li>
+                    <li class="head"><i>我的头像：</i>
+                        <img name="oldavatar" src="{% static 'uploads/member/' %}{{ request.session.mobileuser.avatar }}"/>
+                        <input type="file" name="avatar" />
+                        <button class="line">点击上传<br><font>(200x200像素)</font></button>
+                    </li>
+                </ul>
+                <ul class="line">
+                    <li><i>手机号码：</i><input type="tel" name="mobile" id="name" placeholder="填写手机号码"></li>
+                </ul>
+                <ul>
+                    <li><button href="{% url 'mobile_member_data_update' %}" type="submit">保存</button></li>
+                </ul>
+            </div>
+
+		</form>
+	</article>
+
+{% endblock %}

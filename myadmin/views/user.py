@@ -88,6 +88,17 @@ def update(request, uid=0):
     try:
         ob = User.objects.get(id=uid)
         ob.nickname = request.POST['nickname']
+
+        # 重置密码
+        if request.POST['password'] != '':
+            import hashlib, random
+            md5 = hashlib.md5()
+            n = random.randint(100000, 999999)
+            s = request.POST['password'] + str(n)  # 从表单中添加密码并添加干扰值
+            md5.update(s.encode('utf-8'))  # 将要产生MD5的串放进去
+            ob.password_hash = md5.hexdigest()  # 获取MD5值
+            ob.password_salt = n
+
         ob.status = request.POST['status']
         ob.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         ob.save()

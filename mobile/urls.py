@@ -34,6 +34,8 @@ urlpatterns = [
     path('member/orders', member.orders, name='mobile_member_orders'),
     path('member/detail', member.detail, name='mobile_member_detail'),
     path('member/logout', member.logout, name='mobile_member_logout'),
+    path('member/data/edit', member.edit, name='mobile_member_data_edit'),
+    path('member/data/update', member.update, name='mobile_member_data_update'),
 
     #购物车信息管理路由
     path('cart/add', cart.add, name='mobile_cart_add'),

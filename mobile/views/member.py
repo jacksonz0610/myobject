@@ -1,3 +1,6 @@
+import os, time
+from datetime import datetime
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -48,3 +51,49 @@ def logout(request):
     '''会员退出'''
     return render(request, 'mobile/register.html')
 
+# 课后作业
+
+def edit(request):
+    '''加载会员资料的编辑模板'''
+    return render(request, 'mobile/member_data.html')
+
+def update(request):
+    '''会员资料的编辑'''
+    try:
+        # 获取原图片
+        oldavatar = request.POST['oldavatar']
+        # 图片的上传操作
+        myfile = request.FILES.get("avatar")
+        if not myfile:
+            avatar = oldavatar
+            print('no file')
+        else:
+            avatar = str(time.time()) + '.' + myfile.name.split('.').pop()
+            destination = open("./static/uploads/member/" + avatar, "wb+")
+            for chunk in myfile.chunks():
+                destination.write(chunk)
+            destination.close()
+            print('执行完毕')
+
+        ob = Member.objects.get(id=request.session['mobileuser']['id'])
+        ob.nickname = request.POST['nickname']
+        if request.POST['mobile'] != '':
+            ob.mobile = request.POST['mobile']
+        ob.avatar = avatar
+        ob.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ob.save()
+        context = {'info': '修改成功！'}
+        # request.session['mobileuser'] = ob.toDict()
+
+        # 判断并删除老图片
+        if myfile:
+            os.remove("./static/uploads/member/" + oldavatar)
+
+    except Exception as err:
+        print(err)
+        context = {'info': '修改失败！'}
+
+        # 判断并删除新图片
+        if myfile:
+            os.remove("./static/uploads/member/" + avatar)
+    return render(request, 'mobile/member.html', context)

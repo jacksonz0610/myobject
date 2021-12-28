@@ -7,8 +7,13 @@ def index(request, pIndex=1):
     '''浏览信息'''
     umod = Member.objects
     ulist = umod.filter(status__lt=9)
-    mywhere = []
     # 判断并处理状态搜索条件
+    mywhere = []
+    kw = request.GET.get('keyword', None)
+    if kw:
+        ulist = ulist.filter(nickname__contains=kw)
+        mywhere.append('keyword=' + kw)
+
     status = request.GET.get('status', '')
     if status != '':
         ulist = ulist.filter(status=status)
