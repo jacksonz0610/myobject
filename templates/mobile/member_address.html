@@ -1,0 +1,34 @@
+{% extends 'mobile/base.html'%}
+
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>收货地址</h1>
+			<a href="{% url 'mobile_member_index' %}" class="return"><i></i></a>
+			<a href="{% url 'mobile_address_add' %}" class="head-r">添加</a>
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+		
+		<!--地址-->
+        {% for address in addresslist %}
+		<div class="order-Address line select">
+			<dl>
+				<dt><i class="icon-head"></i>{{ address.name }}&nbsp;&nbsp;<i class="icon-phone"></i>{{ address.mobile }}</dt>
+				<dd>{{ address.province }}&nbsp;{{ address.city }}&nbsp;{{ address.district }}&nbsp;{{ address.detail }}</dd>
+				<dd class="icon-correct"></dd>
+			</dl>
+			<ul class="line">
+                <li class="line"><a href="{% url 'mobile_address_edit' address.id %}">编辑</a></li>
+                <li><a href="{% url 'mobile_address_delete' address.id %}">删除</a></li>
+            </ul>
+		</div>
+        {% endfor %}
+		
+	</article>
+
+{% endblock %}

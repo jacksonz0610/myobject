@@ -1,0 +1,36 @@
+{% extends 'mobile/base.html' %}
+
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>编辑收货地址</h1>
+			<a href="{% url 'mobile_address_index' %}" class="return"><i></i></a>
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+		
+		<form action="{% url 'mobile_address_update' address_id%}" method="post">
+            {% csrf_token %}
+            <div class="list list-title">
+                <ul class="line">
+                    <li><i>收&nbsp;&nbsp;货&nbsp;&nbsp;人：</i><input type="text" name="name" id="name" value="{{ address.name }}"></li>
+                    <li><i>联系电话：</i><input type="tel" name="mobile" id="name" value="{{ address.mobile }}"></li>
+                    <li class="list03"><i>所在地区：</i>
+                        <input type="text" name="province" id="name" value="{{ address.province }}">
+                        <input type='text' name="city" id="name" value="{{ address.city }}">
+                        <input type='text' name="district" id="name" value="{{ address.district }}">
+                    </li>
+                    <li><i>详情地址：</i><input type="text" name="detail" id="name" value="{{ address.detail }}"></li>
+                    <li><i>邮政编码：</i><input type="tel" name="postalCode" id="name" value="{{ address.postalCode }}"></li>
+                    <li><input type="submit" value="保存" /></li>
+                </ul>
+            </div>
+        </form>
+		
+	</article>
+
+{% endblock %}

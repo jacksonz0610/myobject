@@ -136,3 +136,23 @@ class Payment(models.Model):
     class Meta:
         db_table = 'payment'
 
+
+# 会员地址模型
+class Address(models.Model):
+    member_id = models.IntegerField()
+    name = models.CharField(max_length=50)
+    mobile = models.CharField(max_length=11)
+    province = models.CharField(max_length=20)
+    city = models.CharField(max_length=20)
+    district = models.CharField(max_length=20)
+    detail = models.CharField(max_length=255)
+    postalCode = models.CharField(max_length=10)
+    status = models.IntegerField()# 状态1正常9删除
+
+    def toDict(self):
+        return {'id': self.id, 'member_id': self.member_id, 'name': self.name, 'mobile': self.mobile,
+                'province': self.province, 'city': self.city, 'district': self.district,
+                'detail': self.detail, 'postalCode': self.postalCode, 'status': self.status}
+
+    class Meta:
+        db_table = 'address'

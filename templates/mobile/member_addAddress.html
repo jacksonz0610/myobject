@@ -1,0 +1,36 @@
+{% extends 'mobile/base.html' %}
+
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>添加收货地址</h1>
+			<a href="{% url 'mobile_address_index' %}" class="return"><i></i></a>
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+
+        <form action="{% url 'mobile_address_insert' %}" method="post">
+            {% csrf_token %}
+            <div class="list list-title">
+                <ul class="line">
+                    <li><i>收&nbsp;&nbsp;货&nbsp;&nbsp;人：</i><input type="text" name="name" id="name" placeholder="名字"></li>
+                    <li><i>联系电话：</i><input type="tel" name="mobile" id="name" placeholder="手机或固话"></li>
+                    <li class="list03"><i>所在地区：</i>
+                        <input type="text" name="province" id="name" placeholder="省份">
+                        <input type='text' name="city" id="name" placeholder="市">
+                        <input type='text' name="district" id="name" placeholder="区">
+                    </li>
+                    <li><i>详情地址：</i><input type="text" name="detail" id="name" placeholder="街道门牌信息"></li>
+                    <li><i>邮政编码：</i><input type="tel" name="postalCode" id="name" placeholder="邮政编码（选填）"></li>
+                    <li><input type="submit" value="保存" /></li>
+                </ul>
+            </div>
+        </form>
+		
+	</article>
+
+{% endblock %}
