@@ -1,0 +1,28 @@
+{% extends 'mobile/base.html' %}
+
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>修改密码</h1>
+			<a href="{% url 'mobile_member_index' %}" class="return"><i></i></a>
+			<a href="#" class="head-r">保存</a>
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+		
+		<div class="list">
+			<ul class="line">
+				<li><i class="icon-pwd"></i><input type="password" id="name" placeholder="原始密码"></li>
+				<li><i class="icon-pwd"></i><input type="password" id="name" placeholder="填写新密码"></li>
+				<li><i class="icon-pwd"></i><input type="password" id="name" placeholder="确认新密码"></li>
+                <li>注意：会员账号当前仅支持验证登录，无法进行密码登录</li>
+			</ul>
+		</div>
+		
+	</article>
+
+{% endblock %}

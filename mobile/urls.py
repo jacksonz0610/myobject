@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mobile.views import index, member, cart, address
+from mobile.views import index, member, cart, address, coupon
 
 # 会员移动端子路由配置
 urlpatterns = [
@@ -36,6 +36,8 @@ urlpatterns = [
     path('member/logout', member.logout, name='mobile_member_logout'),
     path('member/data/edit', member.edit, name='mobile_member_data_edit'),
     path('member/data/update', member.update, name='mobile_member_data_update'),
+    path('member/pwd/edit', member.editPwd, name='mobile_member_pwd_edit'),
+    path('member/pwd/update', member.updatePwd, name='mobile_member_pwd_update'),
 
     # 会员收货地址管理路由
     path('member/address/index', address.index, name='mobile_address_index'),
@@ -50,4 +52,8 @@ urlpatterns = [
     path('cart/delete', cart.delete, name='mobile_cart_delete'),
     path('cart/clear', cart.clear, name='mobile_cart_clear'),
     path('cart/change', cart.change, name='mobile_cart_change'),
+
+    # 优惠券信息管理路由
+    path('member/coupon/index', coupon.index, name='mobile_coupon_index')
+
 ]

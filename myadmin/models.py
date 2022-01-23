@@ -156,3 +156,20 @@ class Address(models.Model):
 
     class Meta:
         db_table = 'address'
+
+
+# 会员优惠券模型
+class Coupon(models.Model):
+    member_id = models.IntegerField()
+    price = models.IntegerField()
+    require = models.IntegerField()
+    detail = models.CharField(max_length=200)
+    startdate = models.DateTimeField()
+    enddate = models.DateTimeField()
+    status = models.IntegerField()  # 状态1正常2过期9已使用
+    create_at = models.DateTimeField(default=datetime.now)
+    update_at = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        db_table = 'coupon'
+

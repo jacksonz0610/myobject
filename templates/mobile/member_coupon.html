@@ -1,0 +1,52 @@
+{% extends 'mobile/base.html' %}
+
+{% block mainbody %}
+
+	<!--头部-->
+	<header>
+		<div class="header">
+			<h1>优惠券</h1>
+			<a href="{% url 'mobile_member_index' %}" class="return"><i></i></a>
+		</div>
+	</header>
+	
+	<!--内容区-->
+	<article class="main-container">
+		
+		<!--手动添加优惠券-->
+		<dl class="Coupon-add line">
+			<dt>手动添加优惠券</dt>
+			<dd class="button"><input type="number" placeholder="请输入优惠券号码"><button>激活</button></dd>
+		</dl>
+		
+		<!--优惠券列表-->
+		<div class="Coupon-Content line">
+			
+			<!--选项卡-->
+			<div class="Coupon-Content-header line">
+				<a href="#" class="line active">可用优惠券</a>
+                <a href="#">过期优惠券</a>
+			</div>
+			
+			<div class="Coupon-Content-list">
+				{% for coupon in couponlist %}
+                    <div class="Couponbox">
+                        <div class="Couponbox-header">
+                            <b><sub>￥</sub>{{ coupon.price }}</b>
+                            <p><font>满{{ coupon.require }}元使用</font>元优惠券</p>
+                        </div>
+                        <div class="Couponbox-footer">
+                            <p>使用范围：{{ coupon.detail }}</p>
+                            <p>有&nbsp;&nbsp;效&nbsp;&nbsp;期：<span>{{ coupon.startdate|date:'Y.m.d' }}--{{ coupon.enddate|date:'Y.m.d' }}</span></p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+				
+			</div>
+			
+		</div>
+		
+	</article>
+
+{% endblock %}

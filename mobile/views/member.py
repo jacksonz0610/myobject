@@ -97,3 +97,9 @@ def update(request):
         if myfile:
             os.remove("./static/uploads/member/" + avatar)
     return render(request, 'mobile/member.html', context)
+
+def editPwd(request):
+    return render(request, 'mobile/member_pwd.html')
+
+def updatePwd(request):
+    pass

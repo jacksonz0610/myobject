@@ -97,7 +97,8 @@ def doAddOrders(request):
         od.payment_status = 2 # 1未支付2已支付3已退款
         od.create_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         od.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        od.save()
+        if od.money != 0:
+            od.save()
 
         # 支付信息添加
         op = Payment()
@@ -109,7 +110,8 @@ def doAddOrders(request):
         op.status = 2# 1未支付2已支付3已退款
         op.create_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         op.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        op.save()
+        if od.money != 0:
+            op.save()
 
         # 执行订单详情的添加
         cartlist = request.session.get('cartlist', {})# 获取购物车中的菜品信息

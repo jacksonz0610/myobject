@@ -28,7 +28,7 @@
                     </li>
                 </ul>
                 <ul class="line">
-                    <li><i>手机号码：</i><input type="tel" name="mobile" id="name" placeholder="填写手机号码"></li>
+                    <li><i>手机号码：</i><input type="tel" name="mobile" id="name" placeholder="填写手机号码" value="{{ request.session.mobileuser.mobile }}"></li>
                 </ul>
                 <ul>
                     <li><button href="{% url 'mobile_member_data_update' %}" type="submit">保存</button></li>
